@@ -1,8 +1,28 @@
 require('dotenv').config()
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 const usersRoute = require('./routes/users');
+
+//CORS Setting
+const CorsOptions = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE',
+      'PATCH'
+    ],
+    allowedHeaders: [
+      'Content-Type', 'Authorization'
+    ],
+};
+  
+app.use(cors());
+
 
 app.use(express.json());
 
