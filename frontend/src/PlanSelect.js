@@ -45,7 +45,7 @@ function PlanSelect() {
             <h2>Selected Plan</h2>
             <p className="plan-details"> <b>NAME</b> -  <i>{selectedPlan.name.toUpperCase()}</i></p>
             <p className="plan-details"><b>PRICE</b>  -  <i>Rs.{selectedPlan.price} / {selectedPlan.interval==='monthly'?'month':'year'}</i></p>
-            <Link to='/'>
+            <Link to='/subscribe' state={{ plan: selectedPlan }}>
               <button className="btn">Proceed For Payment</button>
             </Link>
           </div>

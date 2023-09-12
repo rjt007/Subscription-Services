@@ -17,17 +17,17 @@ function LoginForm() {
     try {
       // Send Login data to server
       const response = await axios.post('http://localhost:8000/api/user/login', formData);
-
-      //Set AccessToken to LocalStorage
-      localStorage.setItem('accessToken',response.data.accessToken);
-      
-      alert('Login successful!');
-      
+      if (response.data) {
+        //Set AccessToken to LocalStorage
+        localStorage.setItem('accessToken',response.data.accessToken);
+        alert('Login successful!');
+      } else {
+        alert('Login failed. Please try again.');
+      }      
       //Navigate to PlanSelect route
       navigate('/plans');
     } catch (error) {
-      console.error('Login error:', error);
-      alert('Login failed. Please try again.');
+      alert('Login failed - '+ error.message);
     }
   };
 

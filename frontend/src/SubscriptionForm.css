@@ -1,0 +1,38 @@
+.subscription-form {
+  max-width: 400px;
+  margin: 40vh auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.card-element {
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: #ff0000;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.success-message {
+  color: #008000;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.subscribe-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.subscribe-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
