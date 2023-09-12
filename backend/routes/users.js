@@ -105,8 +105,7 @@ router.post('/subscribe',authorizeToken,async(req,res)=>{
             subscriptionId: subscription.id
         }
         });
-
-        res.status(201).json({plan,clientSecret: subscription.latest_invoice.payment_intent.client_secret});
+        res.status(201).json({clientSecret: subscription.latest_invoice.payment_intent.client_secret});
     }
     catch(err){
         res.status(500).json({message:err.message});
