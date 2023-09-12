@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 
 const usersRoute = require('./routes/users');
+const plansRoute = require('./routes/plans');
 
 //CORS Setting
 const CorsOptions = {
@@ -31,6 +32,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use('/api/user',usersRoute);
+app.use('/api/plans',plansRoute);
 
 //Database Connection
 const connectDB = require('./config/db');
