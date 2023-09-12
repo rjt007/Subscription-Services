@@ -12,7 +12,7 @@ const Plan = require('../models/plan');
 router.post('/register', async(req,res)=>{
     const {name,email,password} = req.body;
     if(!name || !email || !password){
-        return res.status(400).json('Error! All fields are required.');
+        return res.status(400).json({message:'Error! All fields are required.'});
     }
     try{
         const hashedPassword = await bcrypt.hash(password,10);
@@ -33,15 +33,15 @@ router.post('/register', async(req,res)=>{
 router.post('/login', async(req,res)=>{
     const {email,password} = req.body;
     if(!email || !password){
-        return res.status(400).json('Error! All fields are required.');
+        return res.status(400).json({message:'Error! All fields are required.'});
     }
     try{
         const user = await User.findOne({email:email});
         if(user==null){
-            return res.status(400).json('Error! Enter a valid email.');
+            return res.status(400).json({message:'Error! Enter a valid email.'});
         }
         else if(!(await bcrypt.compare(password,user.password))){
-            return res.status(400).json('Error! Password entered is wrong.');
+            return res.status(400).json({message:'Error! Password entered is wrong.'});
         }
         else{
             const userId = {id:user.id};
@@ -50,7 +50,7 @@ router.post('/login', async(req,res)=>{
         }
     }
     catch(err){
-        return res.status(500).json(err.message);
+        res.status(500).json({message:err.message});
     }
 });
 
@@ -58,7 +58,7 @@ router.post('/login', async(req,res)=>{
 router.post('/subscribe',authorizeToken,async(req,res)=>{
     const {planId, stripeToken} = req.body;
     if(!planId || !stripeToken){
-        return res.status(400).json('Error! either Id or Token is missing');
+        return res.status(400).json({message:'Error! either Id or Token is missing'});
     }
     try{
         const user = await User.findOne({_id:req.userId.id});
@@ -109,7 +109,33 @@ router.post('/subscribe',authorizeToken,async(req,res)=>{
         res.status(201).json({plan,clientSecret: subscription.latest_invoice.payment_intent.client_secret});
     }
     catch(err){
-        res.status(500).json(err.message);
+        res.status(500).json({message:err.message});
+    }
+});
+
+//Unsubscribe from Subscription
+router.post('/unsubscribe',authorizeToken,async(req,res)=>{
+
+    try{
+        const user = await User.findOne({_id:req.userId.id});
+        let subscriptionId = user.subscription.subscriptionId;
+        let planId = user.subscription.planId;
+        if(planId==null || subscriptionId==null){
+            return res.status(400).json({message:'Error! User Already Unsubscribed!'});
+        }
+    
+        //Cancle Subscription
+        await stripe.subscriptions.cancel(user.subscription.subscriptionId);
+    
+        //Updating the database
+        user.subscription.subscriptionId = null;
+        user.subscription.planId = null;
+        await user.save();
+    
+        res.status(200).json({success:true});
+    }
+    catch(err){
+        res.status(500).json({message:err.message});
     }
 });
 
