@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import './Form.css'; 
 
+
 function LoginForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({email: '', password: '' });
 
   const handleInputChange = (e) => {
@@ -20,6 +22,9 @@ function LoginForm() {
       localStorage.setItem('accessToken',response.data.accessToken);
       
       alert('Login successful!');
+      
+      //Navigate to PlanSelect route
+      navigate('/plans');
     } catch (error) {
       console.error('Login error:', error);
       alert('Login failed. Please try again.');

@@ -1,0 +1,40 @@
+.plan-container{
+  text-align: center;
+  margin: 20px;
+}
+.loading {
+  font-size: 18px;
+  color: #007bff;
+}
+
+.error {
+  font-size: 18px;
+  color: #ff0000;
+}
+
+.selected-plan {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.plan-details {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: 2px solid;
+  border-radius: 7px;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
