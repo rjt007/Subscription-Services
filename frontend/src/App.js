@@ -6,6 +6,7 @@ import SubscriptionForm from './SubscriptionForm';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
+import SubscribedPlan from './SubscribedPlan';
 const stripePromise = loadStripe('pk_test_51NpAyaSGkYwGTXoxBVV0EkZhGplQYU0ni2LSJtVP9zO9tCH4KBANA8r5FgBLglUrIfu9WHU9dhCQhrp3f6aRo0Eo00LDv2g5PB');
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path='/login' element={<LoginForm/>}/>
           <Route path='/plans' element={<PlanSelect/>}/>
           <Route path='/subscribe' element={<Elements stripe={stripePromise}><SubscriptionForm/></Elements>}/>
+          <Route path='/subscribed-plan' element={<SubscribedPlan/>}/>
         </Routes>
     </div>
     </Router>

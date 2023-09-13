@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./SubscriptionForm.css";
 
 const SubscriptionForm = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { plan } = location.state;
 
   const [error, setError] = useState(null);
@@ -48,6 +49,12 @@ const SubscriptionForm = () => {
         const confirm = await stripe.confirmCardPayment(response.data.clientSecret);
         if (confirm.error) return alert("Payment unsuccessful!");
         setSuccess(true);
+        //Navigate to show subscribed-plan
+        navigate('/subscribed-plan',{
+          state:{
+            planId: plan._id
+          }
+        });
         return;
       }
       else{
