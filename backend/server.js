@@ -25,6 +25,10 @@ const CorsOptions = {
 app.use(cors());
 app.use(express.json());
 
+app.get('/',(req,res)=>{
+  res.json({request:'success'});
+});
+
 app.use('/api/user',usersRoute);
 app.use('/api/plans',plansRoute);
 
