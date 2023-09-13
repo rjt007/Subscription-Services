@@ -43,7 +43,7 @@ const SubscriptionForm = () => {
         'Authorization': `Bearer ${accessToken}`
       }
 
-      const response = await axios.post("http://localhost:8000/api/user/subscribe",data,{headers: headers});
+      const response = await axios.post("https://subscription-services-api.onrender.com/api/user/subscribe",data,{headers: headers});
       
       if (response.data) {
         const confirm = await stripe.confirmCardPayment(response.data.clientSecret);

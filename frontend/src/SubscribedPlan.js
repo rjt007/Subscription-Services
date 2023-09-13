@@ -18,7 +18,7 @@ function SubscribedPlan() {
       // Fetch a plan from the API
       const fetchPlan = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/api/plans/${planId}`,{ headers: {"Authorization" : `Bearer ${accessToken}`} });
+          const response = await axios.get(`https://subscription-services-api.onrender.com/api/plans/${planId}`,{ headers: {"Authorization" : `Bearer ${accessToken}`} });
           if (response.data) {
             setPlan(response.data);
           } else {
@@ -41,7 +41,7 @@ function SubscribedPlan() {
       }
       try {
         // Send request to unsubscribe user
-        const response = await axios.post('http://localhost:8000/api/user/unsubscribe',{},{ headers: headers});
+        const response = await axios.post('https://subscription-services-api.onrender.com/api/user/unsubscribe',{},{ headers: headers});
         if(response.data){
           alert(response.data.message);
           //Navigate to success page

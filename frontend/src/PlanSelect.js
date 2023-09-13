@@ -16,7 +16,7 @@ function PlanSelect() {
       // Fetch plans from the API
       const fetchPlans = async () => {
         try {
-          const response = await axios.get('http://localhost:8000/api/plans',{ headers: {"Authorization" : `Bearer ${accessToken}`} });
+          const response = await axios.get('https://subscription-services-api.onrender.com/api/plans',{ headers: {"Authorization" : `Bearer ${accessToken}`} });
           if (response.data) {
             setPlans(response.data);
           } else {

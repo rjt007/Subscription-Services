@@ -16,7 +16,7 @@ function RegistrationForm() {
     e.preventDefault();
     try {
       // Send registration data to server
-      await axios.post('http://localhost:8000/api/user/register', formData);
+      await axios.post('https://subscription-services-api.onrender.com/api/user/register', formData);
       alert('Registration successful!');
       //Navigate to login page
       navigate('/login');

@@ -16,7 +16,7 @@ function LoginForm() {
     e.preventDefault();
     try {
       // Send Login data to server
-      const response = await axios.post('http://localhost:8000/api/user/login', formData);
+      const response = await axios.post('https://subscription-services-api.onrender.com/api/user/login', formData);
       if (response.data) {
         //Set AccessToken to LocalStorage
         localStorage.setItem('accessToken',response.data.accessToken);
