@@ -14,4 +14,15 @@ router.get('/',authorizeToken,async(req,res)=>{
     }
 });
 
+//Get a plan
+router.get('/:id',authorizeToken,async(req,res)=>{
+    try{
+        const plans = await Plan.findOne({_id:req.params.id});
+        res.status(200).json(plans);
+    }
+    catch(err){
+        res.status(500).json({message:err.message});
+    }
+});
+
 module.exports = router;
