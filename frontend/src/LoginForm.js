@@ -39,6 +39,7 @@ function LoginForm() {
           <input
             type="email"
             name="email"
+            required
             placeholder="Email"
             value={formData.email}
             onChange={handleInputChange}
@@ -48,6 +49,7 @@ function LoginForm() {
           <input
             type="password"
             name="password"
+            required
             placeholder="Password"
             value={formData.password}
             onChange={handleInputChange}

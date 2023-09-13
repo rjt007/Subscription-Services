@@ -69,6 +69,7 @@ const SubscriptionForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="subscription-form">
+      <h3>Add Card Details</h3><br />
       <div className="card-element">
         <CardElement />
       </div>
