@@ -22,10 +22,10 @@ router.post('/register', async(req,res)=>{
             password:hashedPassword
         });
         await user.save();
-        return res.status(201).json({success:true});
+        return res.status(201).json({message:'User registered successfully.'});
     }
     catch(err){
-        return res.status(501).json(err.message);
+        return res.status(501).json({message:err.message});
     }
 });
 
@@ -123,7 +123,7 @@ router.post('/unsubscribe',authorizeToken,async(req,res)=>{
             return res.status(400).json({message:'Error! User Already Unsubscribed!'});
         }
     
-        //Cancle Subscription
+        //Cancel Subscription
         await stripe.subscriptions.cancel(user.subscription.subscriptionId);
     
         //Updating the database
@@ -131,7 +131,7 @@ router.post('/unsubscribe',authorizeToken,async(req,res)=>{
         user.subscription.planId = null;
         await user.save();
     
-        res.status(200).json({success:true});
+        res.status(201).json({message:'User unsubscribed successfully!'});
     }
     catch(err){
         res.status(500).json({message:err.message});
